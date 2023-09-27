@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
-
+const helmet = require("helmet");
 const dotenv = require("dotenv");
 // const MONGODB_URI =
 //   "mongodb+srv://amrsalah1999:amr1999@cluster0.doapyuu.mongodb.net/messages";
@@ -50,7 +50,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
-
+app.use(helmet());
 app.use(compression());
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
