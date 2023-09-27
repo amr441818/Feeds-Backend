@@ -55,11 +55,12 @@ app.use(compression());
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
 );
-app.use("/", (req, res, next) => {
-  res.send("App is running");
-});
 app.use("/feed", feedRoutes);
 app.use("/auth", authRoutes);
+app.use("/", (req, res, next) => {
+  res.send("App is running");
+  next();
+});
 
 app.use((error, req, res, next) => {
   console.log(error);
